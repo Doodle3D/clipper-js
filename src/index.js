@@ -92,7 +92,7 @@ export default class Shape {
 
   area(index) {
     const path = this.paths[index];
-    const area = Math.abs(ClipperLib.Clipper.Area(path));
+    const area = ClipperLib.Clipper.Area(path);
     return area;
   }
 
@@ -111,7 +111,7 @@ export default class Shape {
   tresholdArea(minArea) {
     // code not tested yet
     for (const path of [...this.paths]) {
-      const area = ClipperLib.Clipper.Area(shape);
+      const area = Math.abs(ClipperLib.Clipper.Area(shape));
 
       if (area < minArea) {
         const index = this.paths.indexOf(path);
