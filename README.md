@@ -37,9 +37,9 @@ Using JSPM
 import Shape from 'Doodle3D/ClipperJS';
 ```
 
-Using NPM (not published yet)
+Using NPM
 ```javascript
-const Shape from 'clipper-js'; // not yet published on npm
+const Shape from 'clipper-js';
 ```
 
 # API
