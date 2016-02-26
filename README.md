@@ -1,7 +1,7 @@
 # ClipperJS
 [Clipper](https://sourceforge.net/projects/jsclipper/) abstraction layer (simplified API)
 
-Target of this library is to remove complexity and create an overal cleaner API then Clipper.
+Target of this library is to remove complexity and create an overal cleaner API for Clipper.
 
 When using this API one class, Shape, is used. Shape is a collection of paths that are all collectivly closed or open. Shapes with holes are devined as multiple closed paths where the outlines are clockwise and the holes are counter-clockwise. Shapes has multiple functions that can be used to for instance compute complex boolean operations from one just call.
 
