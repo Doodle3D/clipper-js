@@ -52,7 +52,7 @@ new Shape([ paths = [], closed = true, capitalConversion = false ]);
 
 paths = [...[...{ X: Number, Y: Number }]
 paths = [...[...{ x: Number, y: Number }]
-paths = []
+paths = Array
 closed = Bool
 capitalConversion = Bool
 ```
