@@ -181,25 +181,12 @@ export default class Shape {
     return ClipperLib.Clipper.PointInPolygon(intPoint, path) > 0;
   }
 
-  checkOrientation() {
+  fixOrientation() {
     if (!this.closed) {
       return this;
     }
 
-    let maxSize = 0;
-    let indexMax;
-
-    for (let i = 0; i < this.paths.length; i ++) {
-      const { size } = this.pathBounds(i);
-
-      if (size > maxSize) {
-        maxSize = size;
-        indexMax = i;
-      }
-    }
-
-    const orientation = this.orientation(i);
-    if (!orientation) {
+    if (this.totalArea() < 0) {
       this.reverse();
     }
   }
