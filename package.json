@@ -1,0 +1,68 @@
+{
+  "name": "clipper-js",
+  "version": "0.0.1",
+  "description": "Clipper-lib abstraction layer (simplified API)",
+  "main": "lib/index.js",
+  "scripts": {
+    "prepublish": "npm run build",
+    "test": "npm run test:node",
+    "test:browser": "npm run serve -- --startPath='tests/'",
+    "test:node": "node_modules/babel-cli/bin/babel-node.js tests/index.js",
+    "serve": "browser-sync start --server --files='**, !jspm_packages, !node_modules'",
+    "build": "node_modules/babel-cli/bin/babel.js src --out-dir lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/Doodle3D/clipperJS.git"
+  },
+  "keywords": [
+    "clipper",
+    "vector",
+    "js"
+  ],
+  "files": [
+    "lib"
+  ],
+  "author": "Casper @ Doodle3D",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.5.1",
+    "babel-core": "^6.5.2",
+    "babel-plugin-add-module-exports": "^0.1.2",
+    "babel-preset-es2015": "^6.5.0",
+    "browser-sync": "^2.11.1",
+    "chokidar-socket-emitter": "^0.5.0",
+    "jspm": "^0.16.29",
+    "tape": "^4.4.0"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ],
+    "plugins": [
+      "add-module-exports"
+    ]
+  },
+  "format": "esm",
+  "directories": {
+    "lib": "src"
+  },
+  "jspm": {
+    "main": "index.js",
+    "directories": {
+      "lib": "src"
+    },
+    "dependencies": {
+      "clipper-lib": "npm:clipper-lib@^1.0.0"
+    },
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.8.24",
+      "babel-runtime": "npm:babel-runtime@^5.8.24",
+      "core-js": "npm:core-js@^1.1.4",
+      "tape": "npm:tape@^4.4.0"
+    }
+  },
+  "dependencies": {
+    "clipper-lib": "^1.0.0"
+  }
+}
