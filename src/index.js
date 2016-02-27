@@ -105,9 +105,7 @@ export default class Shape {
   }
 
   reverse() {
-    for (const path of this.paths) {
-      path.reverse();
-    }
+    ClipperLib.Clipper.ReversePaths(this.paths);
 
     return this;
   }
