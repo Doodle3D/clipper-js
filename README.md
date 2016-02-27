@@ -170,7 +170,7 @@ reverses the order of all sub shapes.
 
 **Treshold Area**
 ```javascript
-tresholdArea( minArea: Number )
+Shape.tresholdArea( minArea: Number )
 ```
   - minArea: minimal size of area
 
@@ -179,7 +179,7 @@ removes all sub shapes from shape which are smaller then min area.
 
 **Join**
 ```javascript
-join( shape )
+Shape.join( shape )
 ```
 joins shape with given shape.
 
@@ -188,7 +188,7 @@ joins shape with given shape.
 
 **[Clone](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibjsclone)**
 ```javascript
-Shape = clone()
+Shape = Shape.clone()
 ```
 returns copy of shape.
 
@@ -203,7 +203,7 @@ returns copy of shape.
   width: Int,
   height: Int,
   size: Int
-} = shapeBounds()
+} = Shape.shapeBounds()
 ```
 returns bounding box of shape.
 
@@ -218,26 +218,26 @@ returns bounding box of shape.
   width: Int,
   height: Int,
   size: Int
-} = pathBounds( index: Int )
+} = Shape.pathBounds( index: Int )
 ```
 returns bounding box of sub shape.
 
 
 **[Clean](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibclippercleanpolygons)**
 ```javascript
-Shape = clean( cleanDelta: Number )
+Shape = Shape.clean( cleanDelta: Number )
 ```
 
 **[Orientation](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibclipperorientation)**
 ```javascript
-Bool = orientation( index: Int )
+Bool = Shape.orientation( index: Int )
 ```
 returns orientation of the sub shape. True if clockwise, false if counter clock wise.
 
 
 **Point In Shape**
 ```javascript
-Bool = pointInShape( { X: Number, Y: Number } )
+Bool = Shape.pointInShape( { X: Number, Y: Number } )
 ```
   - point: position used for hit detection
 
@@ -246,7 +246,7 @@ returns if point is in shape.
 
 **[Point In Path](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibclipperpointinpolygon)**
 ```javascript
-Bool = pointInPath( index: Int, { X: Number, Y: Number } )
+Bool = Shape.pointInPath( index: Int, { X: Number, Y: Number } )
 ```
   - point: position used for hit detection
   - index: index of sub shape
@@ -256,27 +256,29 @@ returns if point is in sub shape.
 
 **Fix Orientation**
 ```javascript
-fixOrientation()
+Shape.fixOrientation()
 ```
 when given path with holes, outline must be clockwise and holes must be counter-clockwise. Tries to fix the orientation.
+
+`Note: destructive`
 
 
 **[Remove Overlap](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibclippersimplifypolygons)**
 ```javascript
-removeOverlap()
+Shape = Shape.removeOverlap()
 ```
 unions all self intersecting shapes. Only works with closed shapes.
 
 
 **Sperate Shapes**
 ```javascript
-[...Shape] = seperateShapes()
+[...Shape] = Shape.seperateShapes()
 ```
 when using union operations multiple shapes can be created. Sperate Shapes splits these shapes into seperate instances. All shapes keep their holes.
 
 
 **Map To Lower**
 ```javascript
-[...[...{ x: Number, y: Number }]] = mapToLower()
+[...[...{ x: Number, y: Number }]] = Shape.mapToLower()
 ```
 returns paths array with lower case x and y.
