@@ -1,6 +1,7 @@
 import ClipperLib from 'clipper-lib';
 
 const CLIPPER = new ClipperLib.Clipper();
+const CLIPPER_OFFSET = new ClipperLib.ClipperOffset();
 
 export default class Shape {
   constructor(paths = [], closed = true, capitalConversion = false) {
@@ -50,10 +51,13 @@ export default class Shape {
       roundPrecision = 0.25
     } = options;
 
+    CLIPPER_OFFSET.Clear();
+    CLIPPER_OFFSET.ArcTolerance = roundPrecision;
+    CLIPPER_OFFSET.MiterLimit = miterLimit;
+
     const offsetPaths = new ClipperLib.Paths();
-    const clipperOffset = new ClipperLib.ClipperOffset(miterLimit, roundPrecision);
-    clipperOffset.AddPaths(this.paths, ClipperLib.JoinType[jointType], ClipperLib.EndType[endType]);
-    clipperOffset.Execute(offsetPaths, offset);
+    CLIPPER_OFFSET.AddPaths(this.paths, ClipperLib.JoinType[jointType], ClipperLib.EndType[endType]);
+    CLIPPER_OFFSET.Execute(offsetPaths, offset);
 
     return new Shape(offsetPaths, true);
   }
