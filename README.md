@@ -1,19 +1,23 @@
 # ClipperJS
 [Clipper](https://sourceforge.net/projects/jsclipper/) abstraction layer (simplified API)
 
-Target of this library is to remove complexity and create an overal cleaner API for Clipper.
+Target of this library is to remove complexity and create an overall cleaner API for Clipper.
 
-When using this API one class, Shape, is used. Shape is a collection of paths that are all collectivly closed or open. Shapes with holes are devined as multiple closed paths where the outlines are clockwise and the holes are counter-clockwise. Shapes has multiple functions that can be used to for instance compute complex boolean operations from one just call.
+When using this API one class, Shape, is used. Shape is a collection of paths that are all collectively closed or open. Shapes with holes are defined as multiple closed paths where the outlines are clockwise and the holes are counter-clockwise. Shapes has multiple functions that can be used to for instance compute complex boolean operations from one just call.
+
+The next two code examples show a simple Boolean operation in clipper and in ClipperJS. Both use two predefined paths
+
+```javascript
+const subjectPaths = [[{ X: 30, Y: 30 }, { X: 10, Y: 30 }, { X: 10, Y: 10 }, { X: 30, Y: 10 }]];
+const clipPaths = [[{ X: 20, Y: 20 }, { X: 0, Y: 20 }, { X: 0, Y:0 }, { X: 20, Y: 0 }]];
+```
 
 A boolean intersect operation in clipper looks like this
 ```javascript
-const subject = [[{ X: 30, Y: 30 }, { X: 10, Y: 30 }, { X: 10, Y: 10 }, { X: 30, Y: 10 }]];
-const clip = [[{ X: 20, Y: 20 }, { X: 0, Y: 20 }, { X: 0, Y:0 }, { X: 20, Y: 0 }]];
-
 const result = new ClipperLib.Paths();
 const clipper = new ClipperLib.Clipper();
-clipper.AddPaths(subject, ClipperLib.PolyType.ptSubject, true);
-clipper.AddPaths(clip, ClipperLib.PolyType.ptClip, true);
+clipper.AddPaths(subjectPaths, ClipperLib.PolyType.ptSubject, true);
+clipper.AddPaths(clipPaths, ClipperLib.PolyType.ptClip, true);
 clipper.Execute(ClipperLib.ClipType.ctIntersection, result);
 
 // result = [[{ X: 20, Y: 20 }, { X: 10, Y: 20 }, { X: 10, Y: 10 }, { X: 20, Y: 10 }]]
@@ -21,8 +25,8 @@ clipper.Execute(ClipperLib.ClipType.ctIntersection, result);
 
 In ClipperJS
 ```javascript
-const subject = new Shape([[{ X: 30, Y: 30 }, { X: 10, Y: 30 }, { X: 10, Y: 10 }, { X: 30, Y: 10 }]], true);
-const clip = new Shape([[{ X: 30, Y: 30 }, { X: 10, Y: 30 }, { X: 10, Y: 10 }, { X: 30, Y: 10 }]], true);
+const subject = new Shape(subjectPaths, true);
+const clip = new Shape(subjectPaths, true);
 
 const result = subject.intersect(clip);
 
@@ -48,10 +52,9 @@ const Shape from 'clipper-js';
 
 Shape accepts 3 optional arguments, `paths`, `closed` and `capitalConversion`. `paths` can be be devined with both upper case and lower case. Clipper only uses uppercase properties, when input is given with lower case `captalConversion` needs to be set to `true`.
 ```javascript
-new Shape([ paths = [], closed = true, capitalConversion = false ]);
+new Shape([ paths = [], closed = true, capitalConversion = false ])
 
-paths = [...[...{ X: Number, Y: Number }]
-paths = [...[...{ x: Number, y: Number }]
+paths = [...[...{ X: Number, Y: Number }] || [...[...{ x: Number, y: Number }]
 paths = Array
 closed = Bool
 capitalConversion = Bool
@@ -63,35 +66,35 @@ capitalConversion = Bool
 `Note: due to the nature of Clipper, some functions are destructive and some are non-destructive.`
 
 
-[**Boolean operation: Union**](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibclipperexecute)
+**[Boolean operation: Union](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibclipperexecute)**
 ```javascript
 Shape = Shape.union( clipShape: Shape )
 ```
-  - clipShape: clip off the boolean operation
+  - clipShape: clip of the boolean operation
 
 
-[**Boolean operation: Difference**](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibclipperexecute)
+**[Boolean operation: Difference](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibclipperexecute)**
 ```javascript
 Shape = Shape.difference( clipShape: Shape )
 ```
-  - clipShape: clip off the boolean operation
+  - clipShape: clip of the boolean operation
 
 
-[**Boolean operation: Intersect**](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibclipperexecute)
+**[Boolean operation: Intersect](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibclipperexecute)**
 ```javascript
 Shape = Shape.intersect( clipShape: Shape )
 ```
-  - clipShape: clip off the boolean operation
+  - clipShape: clip of the boolean operation
 
 
-[**Boolean operation: Xor**](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibclipperexecute)
+**[Boolean operation: Xor](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibclipperexecute)**
 ```javascript
 Shape = Shape.xor( clipShape: Shape )
 ```
-  - clipShape: clip off the boolean operation
+  - clipShape: clip of the boolean operation
 
 
-[**Offset the shape (scale along normal)**](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperoffset)
+**[Offset](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperoffset)**
 ```javascript
 Shape = Shape.offset( offset: Number, options: {
   jointType = 'jtSquare',
@@ -107,57 +110,62 @@ Shape = Shape.offset( offset: Number, options: {
     - [mitterLimit](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibclipperoffsetmiterlimit): mitter limit
     - [roundPrecision](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibclipperoffsetarctolerance): arc tolerance
 
+offsets the shape along its normal.
 
-**Scale Up**
+
+**[Scale Up](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibjsscaleuppaths)**
 ```javascript
 Shape.scaleUp( factor: Number )
 ```
-Scale up with factor
-`Note: non-destructive`
+scale up with factor.
+
+`Note: destructive`
 
 
-**Scale Down**
+**[Scale Down](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibjsscaledownpaths)**
 ```javascript
 Shape.scaleDown( factor: Number )
 ```
-Scale up with factor
-`Note: non-destructive`
+scale up with factor.
+
+`Note: destructive`
 
 
 **Last Point**
 ```javascript
 {X: Number, Y: Number} = Shape.lastPoint()
 ```
-Returns position of the last point
+returns position of the last point.
 
 
 **Total Area**
 ```javascript
 Number = Shape.totalArea()
 ```
-Returns total area of the shape
+returns total area of the shape.
 
 
-**Area**
+**[Area](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibclipperarea)**
 ```javascript
 Number = Shape.area( index: Int )
 ```
-  - index: index of the subshape
+  - index: index of the sub shape
 
-returns area of the subshape (negative if counter-clock wise)
+returns area of the sub shape (negative if counter-clock wise).
 
 
 **Areas**
 ```javascript
 [...Number] = Shape.areas()
 ```
-returns array of areas of the subshape
+returns array of areas of all sub shapes.
 
-**Reverse**
+
+**[Reverse](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibclipperreversepaths)**
 ```javascript
 Shape.reverse()
 ```
-reverses all paths in shape
+reverses the order of all sub shapes.
 
 
 **Treshold Area**
@@ -166,61 +174,61 @@ tresholdArea( minArea: Number )
 ```
   - minArea: minimal size of area
 
-removes all shapes smaller then min area
+removes all sub shapes from shape which are smaller then min area.
 
 
 **Join**
 ```javascript
 join( shape )
 ```
-joins shape with given shape
+joins shape with given shape.
 
-`Note: non-destructive`
+`Note: destructive`
 
 
-**Clone**
+**[Clone](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibjsclone)**
 ```javascript
 Shape = clone()
 ```
-returns copy of shape
+returns copy of shape.
 
 
-**Shape Bounds**
+**[Shape Bounds](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibjsboundsofpaths)**
 ```javascript
 {
-  left: Number,
-  right: Number,
-  top: Number,
-  bottom: Number,
-  width: Number,
-  height: Number,
-  size: Number
+  left: Int,
+  right: Int,
+  top: Int,
+  bottom: Int,
+  width: Int,
+  height: Int,
+  size: Int
 } = shapeBounds()
 ```
-returns bounding box of shape
+returns bounding box of shape.
 
 
-**Path Bounds**
+**[Path Bounds](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibjsboundsofpath)**
 ```javascript
 {
-  left: Number,
-  right: Number,
-  top: Number,
-  bottom: Number,
-  width: Number,
-  height: Number,
-  size: Number
+  left: Int,
+  right: Int,
+  top: Int,
+  bottom: Int,
+  width: Int,
+  height: Int,
+  size: Int
 } = pathBounds( index: Int )
 ```
-returns bounding box of sub shape
+returns bounding box of sub shape.
 
 
-**Clean**
+**[Clean](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibclippercleanpolygons)**
 ```javascript
 Shape = clean( cleanDelta: Number )
 ```
 
-**Orientation**
+**[Orientation](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibclipperorientation)**
 ```javascript
 Bool = orientation( index: Int )
 ```
@@ -233,42 +241,42 @@ Bool = pointInShape( { X: Number, Y: Number } )
 ```
   - point: position used for hit detection
 
-returns if point is in shape
+returns if point is in shape.
 
 
-**Point In Path**
+**[Point In Path](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibclipperpointinpolygon)**
 ```javascript
 Bool = pointInPath( index: Int, { X: Number, Y: Number } )
 ```
   - point: position used for hit detection
-  - index: index of subshape
+  - index: index of sub shape
 
-returns if point is in sub shape
+returns if point is in sub shape.
 
 
 **Fix Orientation**
 ```javascript
 fixOrientation()
 ```
-When given path with holes, outline must be clockwise and holes must be counter-clockwise. Tries to fix the orientation.
+when given path with holes, outline must be clockwise and holes must be counter-clockwise. Tries to fix the orientation.
 
 
-**Remove Overlap**
+**[Remove Overlap](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibclippersimplifypolygons)**
 ```javascript
 removeOverlap()
 ```
-Unions all self intersecting shapes. Only works with closed shapes.
+unions all self intersecting shapes. Only works with closed shapes.
 
 
 **Sperate Shapes**
 ```javascript
 [...Shape] = seperateShapes()
 ```
-When using union operations multiple shapes can be created. Sperate Shapes splits these shapes into seperate instances. All shapes keep their holes.
+when using union operations multiple shapes can be created. Sperate Shapes splits these shapes into seperate instances. All shapes keep their holes.
 
 
 **Map To Lower**
 ```javascript
 [...[...{ x: Number, y: Number }]] = mapToLower()
 ```
-returns paths array with lower case x and y
+returns paths array with lower case x and y.
