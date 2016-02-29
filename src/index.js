@@ -43,7 +43,7 @@ export default class Shape {
     return this._clip(clipShape, ClipperLib.ClipType.ctXor);
   }
 
-  offset(offset, options) {
+  offset(offset, options = {}) {
     const {
       jointType = 'jtSquare',
       endType = 'etClosedPolygon',
