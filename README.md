@@ -36,12 +36,12 @@ const result = subject.intersect(clip);
 # Usage
 Include the library.
 
-Using JSPM
+Using JSPM (ECMAScript / ES6 Module)
 ```javascript
 import Shape from 'Doodle3D/ClipperJS';
 ```
 
-Using NPM
+Using NPM (CommonJS module)
 ```javascript
 var Shape = require('clipper-js');
 ```
