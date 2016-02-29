@@ -43,7 +43,7 @@ import Shape from 'Doodle3D/ClipperJS';
 
 Using NPM
 ```javascript
-const Shape from 'clipper-js';
+var Shape = require('clipper-js');
 ```
 
 # API
