@@ -117,7 +117,7 @@ export default class Shape {
   }
 
   join(shape) {
-    this.paths.join(shape.paths);
+    this.paths.push(...shape.paths);
 
     return this;
   }
