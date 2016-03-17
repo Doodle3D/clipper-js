@@ -17,13 +17,7 @@ export default class Shape {
     CLIPPER.AddPaths(clipShape.paths, ClipperLib.PolyType.ptClip, clipShape.closed);
     CLIPPER.Execute(type, solution);
 
-    let newShape;
-    if (this.closed) {
-      newShape = ClipperLib.Clipper.ClosedPathsFromPolyTree(solution);
-    } else {
-      newShape = ClipperLib.Clipper.OpenPathsFromPolyTree(solution);
-    }
-
+    const newShape = ClipperLib.Clipper.PolyTreeToPaths(solution);
     return new Shape(newShape, this.closed);
   }
 
