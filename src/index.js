@@ -185,6 +185,8 @@ export default class Shape {
     if (this.totalArea() < 0) {
       this.reverse();
     }
+
+    return this;
   }
 
   removeOverlap() {
