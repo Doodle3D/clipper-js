@@ -52,7 +52,7 @@ var Shape = require('clipper-js');
 
 Shape accepts 3 optional arguments, `paths`, `closed` and `capitalConversion`. `paths` can be be devined with both upper case and lower case. Clipper only uses uppercase properties, when input is given with lower case `captalConversion` needs to be set to `true`.
 ```javascript
-new Shape([ paths = [], closed = true, capitalConversion = false ])
+new Shape([ paths = [], closed = true, capitalConversion = false, integerConversion = false ])
 
 paths = [...[...{ X: Number, Y: Number }] || [...[...{ x: Number, y: Number }]
 paths = Array
@@ -62,6 +62,7 @@ capitalConversion = Bool
   - paths: the paths that make up the shape
   - closed: Shape is a polygon or line
   - capitalConversion: converts lower case x and y to uppercase X and Y
+  - clipper only works with intergers, sometimes when input is in floats clipper fails
 
 `Note: due to the nature of Clipper, some functions are destructive and some are non-destructive.`
 
@@ -237,19 +238,21 @@ returns orientation of the sub shape. True if clockwise, false if counter clock 
 
 **Point In Shape**
 ```javascript
-Bool = Shape.pointInShape( { X: Number, Y: Number } )
+Bool = Shape.pointInShape( { X: Number, Y: Number }, [ integerConversion = false ] )
 ```
   - point: position used for hit detection
+  - integerConversion: converts point to intpoint
 
 returns if point is in shape.
 
 
 **[Point In Path](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibclipperpointinpolygon)**
 ```javascript
-Bool = Shape.pointInPath( index: Int, { X: Number, Y: Number } )
+Bool = Shape.pointInPath( index: Int, { X: Number, Y: Number }, [ integerConversion = false ] )
 ```
   - point: position used for hit detection
   - index: index of sub shape
+  - integerConversion: converts point to intpoint
 
 returns if point is in sub shape.
 
