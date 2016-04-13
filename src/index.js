@@ -12,9 +12,6 @@ export default class Shape {
     this.paths = paths;
     if (capitalConversion) this.paths = this.paths.map(mapLowerToCapital);
     if (integerConversion) this.paths = this.paths.map(mapToRound);
-
-    console.log(integerConversion);
-
     this.closed = closed;
   }
 
