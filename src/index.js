@@ -8,8 +8,13 @@ const CLIPPER = new ClipperLib.Clipper();
 const CLIPPER_OFFSET = new ClipperLib.ClipperOffset();
 
 export default class Shape {
-  constructor(paths = [], closed = true, capitalConversion = false) {
-    this.paths = capitalConversion ? paths.map(mapLowerToCapital) : paths;
+  constructor(paths = [], closed = true, capitalConversion = false, integerConversion = false) {
+    this.paths = paths;
+    if (capitalConversion) this.paths = this.paths.map(mapLowerToCapital);
+    if (integerConversion) this.paths = this.paths.map(mapToRound);
+
+    console.log(integerConversion);
+
     this.closed = closed;
   }
 
@@ -161,7 +166,8 @@ export default class Shape {
     return ClipperLib.Clipper.Orientation(path);
   }
 
-  pointInShape(point) {
+  pointInShape(point, round = false) {
+    if (round) point = roundVector(point);
     for (let i = 0; i < this.paths.length; i ++) {
       const pointInPath = this.pointInPath(i, point);
       const orientation = this.orientation(i);
@@ -174,7 +180,8 @@ export default class Shape {
     return true;
   }
 
-  pointInPath(index, point) {
+  pointInPath(index, point, round = false) {
+    if (round) point = roundVector(point);
     const path = this.paths[index];
     const intPoint = { X: Math.round(point.X), Y: Math.round(point.Y) };
 
@@ -258,10 +265,26 @@ export default class Shape {
   }
 }
 
-function mapCapitalToLower(paths) {
-  return paths.map(({ X, Y }) => ({ x: X, y: Y }));
+function mapCapitalToLower(path) {
+  return path.map(vectorToLower);
 }
 
-function mapLowerToCapital(paths) {
-  return paths.map(({ x, y }) => ({ X: x, Y: y }));
+function vectorToLower({ X, Y }) {
+  return { x: X, y: Y };
+}
+
+function mapLowerToCapital(path) {
+  return path.map(vectorToCapital);
+}
+
+function vectorToCapital({ x, y }) {
+  return { X: x, Y: y };
+}
+
+function mapToRound(path) {
+  return path.map(roundVector);
+}
+
+function roundVector({ X, Y }) {
+  return { X: Math.round(X), Y: Math.round(Y) };
 }
