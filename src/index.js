@@ -1,5 +1,9 @@
 import ClipperLib from 'clipper-lib';
 
+ClipperLib.Error = function(message) {
+  console.warn('clipper error', message);
+}
+
 const CLIPPER = new ClipperLib.Clipper();
 const CLIPPER_OFFSET = new ClipperLib.ClipperOffset();
 
