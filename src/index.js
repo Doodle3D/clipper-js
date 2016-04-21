@@ -123,7 +123,7 @@ export default class Shape {
   }
 
   join(shape) {
-    this.paths.push(...shape.paths);
+    this.paths.splice(this.paths.length, 0, ...shape.paths);
 
     return this;
   }
