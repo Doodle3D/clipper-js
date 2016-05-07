@@ -73,6 +73,16 @@ export default class Shape {
 
     return this;
   }
+  
+  firstPoint() {
+    if (this.paths.length === 0) {
+      return;
+    }
+
+    const firstPath = this.paths[0];
+    const firstPoint = firstPath[0];
+    return vectorToLower(firstPoint);
+  }
 
   lastPoint() {
     if (this.paths.length === 0) {
