@@ -80,7 +80,8 @@ export default class Shape {
     }
 
     const lastPath = this.paths[this.paths.length - 1];
-    return this.closed ? lastPath[0] : lastPath[lastPath.length - 1];
+    const lastPoint = this.closed ? lastPath[0] : lastPath[lastPath.length - 1];
+    return vectorToLower(lastPoint);
   }
 
   areas() {
