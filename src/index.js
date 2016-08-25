@@ -115,19 +115,19 @@ export default class Shape {
     return this.areas().reduce((a, b) => a + b);
   }
   
-  perimiter(index) {
+  perimeter(index) {
     const path = this.paths[index];
-    const perimiter = ClipperLib.Clipper.PerimiterOfPath(path, this.closed);
-    return perimiter;
+    const perimeter = ClipperLib.Clipper.PerimeterOfPath(path, this.closed);
+    return perimeter;
   }
   
-  perimiters() {
-    return this.paths.map(path => ClipperLib.Clipper.PerimiterOfPath(path, this.closed))
+  perimeters() {
+    return this.paths.map(path => ClipperLib.Clipper.PerimeterOfPath(path, this.closed))
   }
   
-  totalPerimiter(index) {
-    const perimiter = ClipperLib.Clipper.PerimiterOfPaths(this.paths, this.closed);
-    return perimiter;
+  totalPerimeter(index) {
+    const perimeter = ClipperLib.Clipper.PerimeterOfPaths(this.paths, this.closed);
+    return perimeter;
   }
 
   reverse() {
