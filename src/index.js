@@ -103,13 +103,7 @@ export default class Shape {
   }
 
   areas() {
-    const areas = [];
-
-    for (let i = 0; i < this.paths.length; i ++) {
-      const area = this.area(i);
-      areas.push(area);
-    }
-
+    const areas = this.paths.map((path, i) => this.area(i));
     return areas;
   }
 
