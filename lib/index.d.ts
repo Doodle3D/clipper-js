@@ -32,8 +32,10 @@ export default class Shape {
     scaleUp(factor: number): this;
     scaleDown(factor: number): this;
 
-    firstPoint(): PointLower;
-    lastPoint(): PointLower;
+    firstPoint(): Point
+    firstPoint(toLower?: boolean): Point | PointLower;
+    lastPoint(): Point
+    lastPoint(toLower?: boolean): Point | PointLower;
 
     areas(): number[];
     area(index: number): number;
@@ -53,8 +55,10 @@ export default class Shape {
     clean(cleanDelta: number): Shape;
 
     orientation(index: number): boolean;
-    pointInShape(point: Point, round?: boolean): boolean;
-    pointInPath(index: number, point: Point, round?: boolean): boolean;
+    pointInShape(point: Point): boolean;
+    pointInShape(point: Point | PointLower, capitalConversion: boolean, integerConversion?: boolean): boolean;
+    pointInPath(index: number, point: Point): boolean;
+    pointInPath(index: number, point: Point | PointLower, capitalConversion: boolean, integerConversion?: boolean): boolean;
 
     fixOrientation(): this;
     removeOverlap(): Shape | this;
