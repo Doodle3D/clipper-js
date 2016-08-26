@@ -113,6 +113,24 @@ test('orientation', (assert) => {
   assert.end();
 });
 
+test('perimeter', (assert) => {
+  const paths = [rect(), rect().reverse()];
+  const shape = new Shape(paths, true, true);
+
+  const actualA = shape.perimeter(0);
+  const expectedA = 40; // 4 * 10
+  const actualB = shape.perimeters();
+  const expectedB = [40, 40];
+  const actualC = shape.totalPerimeter();
+  const expectedC = 80;
+
+  assert.ok(actualA, 'single perimeter should produce the correct value');
+  assert.deepEqual(actualB, expectedB, 'perimeters should produce array of perimeters');
+  assert.ok(actualC === expectedC, 'totalPerimeter should produce the correct value');
+
+  assert.end();
+});
+
 function rect(x = 0, y = 0, w = 10, h = 10) {
   return [
     { x, y },
