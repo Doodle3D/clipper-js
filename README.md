@@ -149,10 +149,21 @@ scale up with factor.
 `Note: destructive`
 
 
+**First Point**
+```javascript
+{ X: Number, Y: Number } || { x: Number, y: Number } = Shape.firstPoint([ toLower: false ])
+```
+- toLower: defines if output should be uppercase or lower case.
+
+returns position of the first point.
+
+
 **Last Point**
 ```javascript
-{X: Number, Y: Number} = Shape.lastPoint()
+{ X: Number, Y: Number } || { x: Number, y: Number } = Shape.lastPoint([ toLower: false ])
 ```
+- toLower: defines if output should be uppercase or lower case.
+
 returns position of the last point.
 
 

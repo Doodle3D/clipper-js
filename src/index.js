@@ -73,25 +73,33 @@ export default class Shape {
 
     return this;
   }
-  
-  firstPoint() {
+
+  firstPoint(toLower = false) {
     if (this.paths.length === 0) {
       return;
     }
 
     const firstPath = this.paths[0];
     const firstPoint = firstPath[0];
-    return vectorToLower(firstPoint);
+    if (toLower) {
+      return vectorToLower(firstPoint);
+    } else {
+      return firstPoint;
+    }
   }
 
-  lastPoint() {
+  lastPoint(toLower = false) {
     if (this.paths.length === 0) {
       return;
     }
 
     const lastPath = this.paths[this.paths.length - 1];
     const lastPoint = this.closed ? lastPath[0] : lastPath[lastPath.length - 1];
-    return vectorToLower(lastPoint);
+    if (toLower) {
+      return vectorToLower(lastPoint);
+    } else {
+      return lastPoint;
+    }
   }
 
   areas() {
