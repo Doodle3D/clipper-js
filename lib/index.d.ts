@@ -42,7 +42,7 @@ export default class Shape {
     perimeters(): number[];
     totalPerimeter(): number;
     reverse(): this;
-    tresholdArea(minArea: number): void; // spelling included
+    thresholdArea(minArea: number): void;
 
     join(shape: Shape): this;
     clone(): Shape;
