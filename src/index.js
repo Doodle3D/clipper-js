@@ -122,10 +122,10 @@ export default class Shape {
   }
   
   perimeters() {
-    return this.paths.map(path => ClipperLib.Clipper.PerimeterOfPath(path, this.closed))
+    return this.paths.map(path => ClipperLib.Clipper.PerimeterOfPath(path, this.closed));
   }
   
-  totalPerimeter(index) {
+  totalPerimeter() {
     const perimeter = ClipperLib.Clipper.PerimeterOfPaths(this.paths, this.closed);
     return perimeter;
   }
