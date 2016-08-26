@@ -151,18 +151,18 @@ scale up with factor.
 
 **First Point**
 ```javascript
-{ X: Number, Y: Number } || { x: Number, y: Number } = Shape.firstPoint([ toLower: false ])
+{ X: Number, Y: Number } || { x: Number, y: Number } = Shape.firstPoint([ capitalConversion: false ])
 ```
-- toLower: defines if output should be uppercase or lower case.
+- capitalConversion: converts uppercase X and Y to lowercase x and y.
 
 returns position of the first point.
 
 
 **Last Point**
 ```javascript
-{ X: Number, Y: Number } || { x: Number, y: Number } = Shape.lastPoint([ toLower: false ])
+{ X: Number, Y: Number } || { x: Number, y: Number } = Shape.lastPoint([ capitalConversion: false ])
 ```
-- toLower: defines if output should be uppercase or lower case.
+- capitalConversion: converts uppercase X and Y to lowercase x and y.
 
 returns position of the last point.
 
@@ -288,9 +288,10 @@ returns orientation of the sub shape. True if clockwise, false if counter clock 
 
 **Point In Shape**
 ```javascript
-Bool = Shape.pointInShape( { X: Number, Y: Number }, [ integerConversion = false ] )
+Bool = Shape.pointInShape( { X: Number, Y: Number }, [ capitalConversion = false, integerConversion = false ] )
 ```
   - point: position used for hit detection
+  - capitalConversion: converts lower case x and y to uppercase X and Y
   - integerConversion: converts point to intpoint
 
 returns if point is in shape.
@@ -298,10 +299,11 @@ returns if point is in shape.
 
 **[Point In Path](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibclipperpointinpolygon)**
 ```javascript
-Bool = Shape.pointInPath( index: Int, { X: Number, Y: Number }, [ integerConversion = false ] )
+Bool = Shape.pointInPath( index: Int, { X: Number, Y: Number }, [ capitalConversion = false, integerConversion = false ] )
 ```
   - point: position used for hit detection
   - index: index of sub shape
+  - capitalConversion: converts lower case x and y to uppercase X and Y
   - integerConversion: converts point to intpoint
 
 returns if point is in sub shape.
