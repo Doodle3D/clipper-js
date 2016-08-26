@@ -19,6 +19,9 @@ export interface PointLower {
 }
 
 export default class Shape {
+    paths: Point[][];
+    closed: boolean;
+    
     constructor(paths: Point[][]);
     constructor(paths: Point[][], closed: boolean);
     constructor(paths: (Point | PointLower)[][], closed: boolean, capitalConversion: boolean, integerConversion?: boolean);
