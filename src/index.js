@@ -116,17 +116,17 @@ export default class Shape {
   totalArea() {
     return this.areas().reduce((a, b) => a + b);
   }
-  
+
   perimeter(index) {
     const path = this.paths[index];
     const perimeter = ClipperLib.Clipper.PerimeterOfPath(path, this.closed);
     return perimeter;
   }
-  
+
   perimeters() {
     return this.paths.map(path => ClipperLib.Clipper.PerimeterOfPath(path, this.closed));
   }
-  
+
   totalPerimeter() {
     const perimeter = ClipperLib.Clipper.PerimeterOfPaths(this.paths, this.closed);
     return perimeter;
@@ -138,7 +138,7 @@ export default class Shape {
     return this;
   }
 
-  tresholdArea(minArea) {
+  thresholdArea(minArea) {
     // code not tested yet
     for (const path of [...this.paths]) {
       const area = Math.abs(ClipperLib.Clipper.Area(shape));
@@ -191,8 +191,9 @@ export default class Shape {
     return ClipperLib.Clipper.Orientation(path);
   }
 
-  pointInShape(point, round = false) {
-    if (round) point = roundVector(point);
+  pointInShape(point, capitalConversion = false, integerConversion = false) {
+    if (capitalConversion) point = vectorToCapital(point);
+    if (integerConversion) point = roundVector(point);
     for (let i = 0; i < this.paths.length; i ++) {
       const pointInPath = this.pointInPath(i, point);
       const orientation = this.orientation(i);
@@ -205,8 +206,9 @@ export default class Shape {
     return true;
   }
 
-  pointInPath(index, point, round = false) {
-    if (round) point = roundVector(point);
+  pointInPath(index, point, capitalConversion = false, integerConversion = false) {
+    if (capitalConversion) point = vectorToCapital(point);
+    if (integerConversion) point = roundVector(point);
     const path = this.paths[index];
     const intPoint = { X: Math.round(point.X), Y: Math.round(point.Y) };
 
