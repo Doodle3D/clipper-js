@@ -3,13 +3,14 @@
   "version": "0.0.4",
   "description": "Clipper-lib abstraction layer (simplified API)",
   "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "scripts": {
     "prepublish": "npm run build",
     "test": "npm run test:node",
     "test:browser": "npm run serve -- --startPath='tests/'",
-    "test:node": "node_modules/babel-cli/bin/babel-node.js tests/index.js",
+    "test:node": "babel-node tests/index.js",
     "serve": "browser-sync start --server --files='**, !jspm_packages, !node_modules'",
-    "build": "node_modules/babel-cli/bin/babel.js src --out-dir lib"
+    "build": "babel src --out-dir lib"
   },
   "repository": {
     "type": "git",
