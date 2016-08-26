@@ -189,6 +189,28 @@ returns area of the sub shape (negative if counter-clock wise).
 ```
 returns array of areas of all sub shapes.
 
+**Total Perimeter**
+```javascript
+Number = Shape.totalPerimeter()
+```
+returns total perimeter of the shape.
+
+
+**[Perimeter](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibjsperimeterofpath)**
+```javascript
+Number = Shape.perimeter( index: Int )
+```
+  - index: index of the sub shape
+
+returns perimeter of the sub shape.
+
+
+**Perimeters**
+```javascript
+[...Number] = Shape.perimeters()
+```
+returns array of perimeters of all sub shapes.
+
 
 **[Reverse](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibclipperreversepaths)**
 ```javascript

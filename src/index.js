@@ -116,6 +116,21 @@ export default class Shape {
   totalArea() {
     return this.areas().reduce((a, b) => a + b);
   }
+  
+  perimeter(index) {
+    const path = this.paths[index];
+    const perimeter = ClipperLib.Clipper.PerimeterOfPath(path, this.closed);
+    return perimeter;
+  }
+  
+  perimeters() {
+    return this.paths.map(path => ClipperLib.Clipper.PerimeterOfPath(path, this.closed));
+  }
+  
+  totalPerimeter() {
+    const perimeter = ClipperLib.Clipper.PerimeterOfPaths(this.paths, this.closed);
+    return perimeter;
+  }
 
   reverse() {
     ClipperLib.Clipper.ReversePaths(this.paths);
