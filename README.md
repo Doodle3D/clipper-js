@@ -332,6 +332,13 @@ unions all self intersecting shapes. Only works with closed shapes.
 when using union operations multiple shapes can be created. Sperate Shapes splits these shapes into seperate instances. All shapes keep their holes.
 
 
+**Round**
+```javascript
+Shape = Shape.round()
+```
+Returns new instance of Shape with all points rounded to Integers.
+
+
 **Map To Lower**
 ```javascript
 [...[...{ x: Number, y: Number }]] = Shape.mapToLower()

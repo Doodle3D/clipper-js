@@ -287,6 +287,10 @@ export default class Shape {
     return shapes;
   }
 
+  round() {
+    return new Shape(this.paths.map(mapToRound), this.closed);
+  }
+
   mapToLower() {
     return this.paths.map(mapCapitalToLower);
   }

@@ -66,5 +66,6 @@ export default class Shape {
     fixOrientation(): this;
     removeOverlap(): Shape | this;
     separateShapes(): Shape[];
+    round(): Shape;
     mapToLower(): PointLower[][];
 }
