@@ -54,7 +54,7 @@
       "lib": "src"
     },
     "dependencies": {
-      "clipper-lib": "npm:clipper-lib@^1.0.0"
+      "clipper-lib": "npm:clipper-lib@^6.2.1"
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.8.24",
@@ -64,6 +64,6 @@
     }
   },
   "dependencies": {
-    "clipper-lib": "^1.0.0"
+    "clipper-lib": "^6.2.1"
   }
 }
