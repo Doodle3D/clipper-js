@@ -262,7 +262,7 @@ export default class Shape {
       }
 
       outlines.sort((a, b) => {
-        return map.get(a).area > map.get(b).area
+        return map.get(a).area - map.get(b).area
       });
 
       for (const outline of outlines) {
