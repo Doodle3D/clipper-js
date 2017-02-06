@@ -244,7 +244,7 @@ export default class Shape {
         shapes.push(new Shape([path], false));
       }
     } else {
-      const map = new WeakMap();
+      const areas = new WeakMap();
       const outlines = [];
       const holes = [];
 
@@ -254,21 +254,19 @@ export default class Shape {
 
         if (orientation) {
           const area = this.area(i);
-          map.set(path, { area, index: i });
+          areas.set(path, area);
           outlines.push(path);
         } else {
           holes.push(path);
         }
       }
 
-      outlines.sort((a, b) => {
-        return map.get(a).area - map.get(b).area
-      });
+      outlines.sort((a, b) => areas.get(a) - areas.get(b));
 
       for (const outline of outlines) {
         const shape = [outline];
 
-        const { index } = map.get(outline);
+        const index = this.paths.indexOf(outline);
 
         for (const hole of [...holes]) {
           const pointInHole = this.pointInPath(index, hole[0]);
