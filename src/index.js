@@ -1,7 +1,11 @@
 import ClipperLib from 'clipper-lib';
 
-ClipperLib.Error = function(message) {
-  console.warn('clipper error', message);
+let errorCallback;
+export const setErrorCallback = (callback) => {
+  errorCallback = callback;
+}
+ClipperLib.Error = (message) => {
+  if (errorCallback) errorCallback(message);
 }
 
 const CLIPPER = new ClipperLib.Clipper();
