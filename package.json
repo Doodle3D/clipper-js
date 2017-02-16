@@ -3,7 +3,7 @@
   "version": "0.0.5",
   "description": "Clipper-lib abstraction layer (simplified API)",
   "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
+  "typings": "src/index.d.ts",
   "scripts": {
     "prepublish": "npm run build",
     "test": "npm run test:node",
