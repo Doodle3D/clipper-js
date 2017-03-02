@@ -12,10 +12,11 @@ const CLIPPER = new ClipperLib.Clipper();
 const CLIPPER_OFFSET = new ClipperLib.ClipperOffset();
 
 export default class Shape {
-  constructor(paths = [], closed = true, capitalConversion = false, integerConversion = false) {
+  constructor(paths = [], closed = true, capitalConversion = false, integerConversion = false, removeDuplicates = false) {
     this.paths = paths;
     if (capitalConversion) this.paths = this.paths.map(mapLowerToCapital);
     if (integerConversion) this.paths = this.paths.map(mapToRound);
+    if (removeDuplicates) this.paths = this.paths.map(filterPathsDuplicates);
     this.closed = closed;
   }
 
@@ -293,6 +294,10 @@ export default class Shape {
     return new Shape(this.paths.map(mapToRound), this.closed);
   }
 
+  removeDuplicates() {
+    return new Shape(this.paths.map(filterPathsDuplicates), this.closed);
+  }
+
   mapToLower() {
     return this.paths.map(mapCapitalToLower);
   }
@@ -320,4 +325,15 @@ function mapToRound(path) {
 
 function roundVector({ X, Y }) {
   return { X: Math.round(X), Y: Math.round(Y) };
+}
+
+function filterPathsDuplicates(path) {
+  return path.filter(filterPathDuplicates);
+}
+
+function filterPathDuplicates(point, i, array) {
+  if (i === 0) return true;
+
+  const prevPoint = array[i - 1];
+  return !(point.X === prevPoint.X && point.Y === prevPoint.Y);
 }

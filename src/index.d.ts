@@ -21,10 +21,11 @@ export interface PointLower {
 export default class Shape {
     paths: Point[][];
     closed: boolean;
-    
+
     constructor(paths: Point[][]);
     constructor(paths: Point[][], closed: boolean);
     constructor(paths: (Point | PointLower)[][], closed: boolean, capitalConversion: boolean, integerConversion?: boolean);
+    constructor(paths: (Point | PointLower)[][], closed: boolean, capitalConversion: boolean, integerConversion?: boolean, removeDuplicates?: boolean);
 
     union(clipShape: Shape): Shape;
     difference(clipShape: Shape): Shape;
@@ -67,5 +68,6 @@ export default class Shape {
     removeOverlap(): Shape | this;
     separateShapes(): Shape[];
     round(): Shape;
+    removeDuplicates(): Shape;
     mapToLower(): PointLower[][];
 }

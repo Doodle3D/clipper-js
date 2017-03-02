@@ -69,17 +69,19 @@ var Shape = require('clipper-js');
 
 Shape accepts 3 optional arguments, `paths`, `closed` and `capitalConversion`. `paths` can be be devined with both upper case and lower case. Clipper only uses uppercase properties, when input is given with lower case `captalConversion` needs to be set to `true`.
 ```javascript
-new Shape([ paths = [], closed = true, capitalConversion = false, integerConversion = false ])
+new Shape([ paths = [], closed = true, capitalConversion = false, integerConversion = false, removeDuplicates = false ])
 
 paths = [...[...{ X: Number, Y: Number }] || [...[...{ x: Number, y: Number }]
 paths = Array
 closed = Bool
 capitalConversion = Bool
+removeDuplicates = Bool
 ```
   - paths: the paths that make up the shape
   - closed: Shape is a polygon or line
   - capitalConversion: converts lower case x and y to uppercase X and Y
-  - clipper only works with intergers, sometimes when input is in floats clipper fails
+  - capitalConversion: clipper only works with intergers, sometimes when input is in floats clipper fails
+  - removeDuplicates: clipper sometimes fails when there are duplicate points in the data set, this argument filters out all the duplicate points
 
 `Note: due to the nature of Clipper, some functions are destructive and some are non-destructive.`
 
@@ -338,6 +340,11 @@ Shape = Shape.round()
 ```
 Returns new instance of Shape with all points rounded to Integers.
 
+**Remove Duplicates**
+```javascript
+Shape = Shape.removeDuplicates()
+```
+Returns new instance of Shape with all duplicate points removed.
 
 **Map To Lower**
 ```javascript
