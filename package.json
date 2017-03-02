@@ -1,6 +1,6 @@
 {
   "name": "clipper-js",
-  "version": "0.0.7",
+  "version": "1.0.0",
   "description": "Clipper-lib abstraction layer (simplified API)",
   "main": "lib/index.js",
   "typings": "src/index.d.ts",
