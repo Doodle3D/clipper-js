@@ -119,7 +119,7 @@ export default class Shape {
   }
 
   totalArea() {
-    return this.areas().reduce((a, b) => a + b);
+    return this.areas().reduce((totalArea, area) => totalArea + area, 0);
   }
 
   perimeter(index) {
