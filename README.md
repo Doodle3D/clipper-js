@@ -320,11 +320,11 @@ when given path with holes, outline must be clockwise and holes must be counter-
 `Note: destructive`
 
 
-**[Remove Overlap](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibclippersimplifypolygons)**
+**[Simplify](https://sourceforge.net/p/jsclipper/wiki/documentation/#clipperlibclippersimplifypolygons)**
 ```javascript
-Shape = Shape.removeOverlap()
+Shape = Shape.simplify(fillType: String)
 ```
-unions all self intersecting shapes. Only works with closed shapes.
+Simplifies shape using filltype. Only works for closed shapes.
 
 
 **Sperate Shapes**

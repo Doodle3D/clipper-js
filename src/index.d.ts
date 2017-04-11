@@ -65,7 +65,7 @@ export default class Shape {
     pointInPath(index: number, point: Point | PointLower, capitalConversion: boolean, integerConversion?: boolean): boolean;
 
     fixOrientation(): this;
-    removeOverlap(): Shape | this;
+    simplify(fillType: string): Shape | this;
     separateShapes(): Shape[];
     round(): Shape;
     removeDuplicates(): Shape;
