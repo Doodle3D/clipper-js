@@ -32,5 +32,8 @@
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-latest": "^6.5.0",
     "browser-sync": "^2.11.1"
+  },
+  "dependencies": {
+    "@doodle3d/clipper-lib": "^6.2.2"
   }
 }
