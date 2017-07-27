@@ -3,9 +3,6 @@ export interface Bounds {
     right: number;
     top: number;
     bottom: number;
-    width: number;
-    height: number;
-    size: number;
 }
 
 export interface Point {

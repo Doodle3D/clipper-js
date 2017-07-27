@@ -166,25 +166,13 @@ export default class Shape {
   }
 
   shapeBounds() {
-    const bounds = ClipperLib.JS.BoundsOfPaths(this.paths);
-
-    bounds.width = bounds.right - bounds.left;
-    bounds.height = bounds.bottom - bounds.top;
-    bounds.size = bounds.width * bounds.height;
-
-    return bounds;
+    return ClipperLib.JS.BoundsOfPaths(this.paths);
   }
 
   pathBounds(index) {
     const path = this.paths[index];
 
-    const bounds = ClipperLib.JS.BoundsOfPath(path);
-
-    bounds.width = bounds.right - bounds.left;
-    bounds.height = bounds.bottom - bounds.top;
-    bounds.size = bounds.width * bounds.height;
-
-    return bounds;
+    return ClipperLib.JS.BoundsOfPath(path);
   }
 
   clean(cleanDelta) {
