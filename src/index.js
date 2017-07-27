@@ -220,11 +220,6 @@ export default class Shape {
     return this;
   }
 
-  removeOverlap() {
-    console.warn(`Shape.removeOverlap is being depricated, use Shape.simplify('pftNonZero') instead`);
-    this.simplify('pftNonZero');
-  }
-
   simplify(fillType) {
     if (this.closed) {
       const shape = ClipperLib.Clipper.SimplifyPolygons(this.paths, ClipperLib.PolyFillType[fillType]);
