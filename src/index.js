@@ -20,32 +20,35 @@ export default class Shape {
     this.closed = closed;
   }
 
-  _clip(clipShape, type) {
+  _clip(type, ...clipShapes) {
     const solution = new ClipperLib.PolyTree();
 
     CLIPPER.Clear();
     CLIPPER.AddPaths(this.paths, ClipperLib.PolyType.ptSubject, this.closed);
-    CLIPPER.AddPaths(clipShape.paths, ClipperLib.PolyType.ptClip, clipShape.closed);
+    for (let i = 0; i < clipShapes.length; i ++) {
+      const clipShape = clipShapes[i];
+      CLIPPER.AddPaths(clipShape.paths, ClipperLib.PolyType.ptClip, clipShape.closed);
+    }
     CLIPPER.Execute(type, solution);
 
     const newShape = ClipperLib.Clipper.PolyTreeToPaths(solution);
     return new Shape(newShape, this.closed);
   }
 
-  union(clipShape) {
-    return this._clip(clipShape, ClipperLib.ClipType.ctUnion);
+  union(...clipShapes) {
+    return this._clip(ClipperLib.ClipType.ctUnion, ...clipShapes);
   }
 
-  difference(clipShape) {
-    return this._clip(clipShape, ClipperLib.ClipType.ctDifference);
+  difference(...clipShapes) {
+    return this._clip(ClipperLib.ClipType.ctDifference, ...clipShapes);
   }
 
-  intersect(clipShape) {
-    return this._clip(clipShape, ClipperLib.ClipType.ctIntersection);
+  intersect(...clipShapes) {
+    return this._clip(ClipperLib.ClipType.ctIntersection, ...clipShapes);
   }
 
-  xor(clipShape) {
-    return this._clip(clipShape, ClipperLib.ClipType.ctXor);
+  xor(...clipShapes) {
+    return this._clip(ClipperLib.ClipType.ctXor, ...clipShapes);
   }
 
   offset(offset, options = {}) {
