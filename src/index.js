@@ -304,7 +304,7 @@ function mapLowerToCapital(path) {
 }
 
 function vectorToCapital({ x, y }) {
-  return { X: x, Y: y };
+  return new ClipperLib.IntPoint(x, y);
 }
 
 function mapToRound(path) {
@@ -312,7 +312,7 @@ function mapToRound(path) {
 }
 
 function roundVector({ X, Y }) {
-  return { X: Math.round(X), Y: Math.round(Y) };
+  return new ClipperLib.IntPoint(Math.round(X), Math.round(Y));
 }
 
 function filterPathsDuplicates(path) {
