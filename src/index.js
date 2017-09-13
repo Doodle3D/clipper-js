@@ -315,7 +315,7 @@ function mapToRound(path) {
 }
 
 function roundVector({ X, Y }) {
-  return new { X: Math.round(X), Y: Math.round(Y) };
+  return { X: Math.round(X), Y: Math.round(Y) };
 }
 
 function filterPathsDuplicates(path) {
