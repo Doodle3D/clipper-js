@@ -1,0 +1,19 @@
+{
+  "env": {
+    // transpile to common node & browser compatible js, keeping modules
+    "module": {
+      "presets": [
+        ["latest", {
+          "modules": false
+        }]
+      ]
+    },
+    // transpile to common node & browser compatible js, using commonjs
+    "main": {
+      "presets": ["latest"]
+    }
+  },
+  "plugins": [
+    "babel-plugin-transform-object-rest-spread"
+  ]
+} 
