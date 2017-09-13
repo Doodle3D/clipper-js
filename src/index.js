@@ -20,32 +20,35 @@ export default class Shape {
     this.closed = closed;
   }
 
-  _clip(clipShape, type) {
+  _clip(type, ...clipShapes) {
     const solution = new ClipperLib.PolyTree();
 
     CLIPPER.Clear();
     CLIPPER.AddPaths(this.paths, ClipperLib.PolyType.ptSubject, this.closed);
-    CLIPPER.AddPaths(clipShape.paths, ClipperLib.PolyType.ptClip, clipShape.closed);
+    for (let i = 0; i < clipShapes.length; i ++) {
+      const clipShape = clipShapes[i];
+      CLIPPER.AddPaths(clipShape.paths, ClipperLib.PolyType.ptClip, clipShape.closed);
+    }
     CLIPPER.Execute(type, solution);
 
     const newShape = ClipperLib.Clipper.PolyTreeToPaths(solution);
     return new Shape(newShape, this.closed);
   }
 
-  union(clipShape) {
-    return this._clip(clipShape, ClipperLib.ClipType.ctUnion);
+  union(...clipShapes) {
+    return this._clip(ClipperLib.ClipType.ctUnion, ...clipShapes);
   }
 
-  difference(clipShape) {
-    return this._clip(clipShape, ClipperLib.ClipType.ctDifference);
+  difference(...clipShapes) {
+    return this._clip(ClipperLib.ClipType.ctDifference, ...clipShapes);
   }
 
-  intersect(clipShape) {
-    return this._clip(clipShape, ClipperLib.ClipType.ctIntersection);
+  intersect(...clipShapes) {
+    return this._clip(ClipperLib.ClipType.ctIntersection, ...clipShapes);
   }
 
-  xor(clipShape) {
-    return this._clip(clipShape, ClipperLib.ClipType.ctXor);
+  xor(...clipShapes) {
+    return this._clip(ClipperLib.ClipType.ctXor, ...clipShapes);
   }
 
   offset(offset, options = {}) {
@@ -166,25 +169,13 @@ export default class Shape {
   }
 
   shapeBounds() {
-    const bounds = ClipperLib.JS.BoundsOfPaths(this.paths);
-
-    bounds.width = bounds.right - bounds.left;
-    bounds.height = bounds.bottom - bounds.top;
-    bounds.size = bounds.width * bounds.height;
-
-    return bounds;
+    return ClipperLib.JS.BoundsOfPaths(this.paths);
   }
 
   pathBounds(index) {
     const path = this.paths[index];
 
-    const bounds = ClipperLib.JS.BoundsOfPath(path);
-
-    bounds.width = bounds.right - bounds.left;
-    bounds.height = bounds.bottom - bounds.top;
-    bounds.size = bounds.width * bounds.height;
-
-    return bounds;
+    return ClipperLib.JS.BoundsOfPath(path);
   }
 
   clean(cleanDelta) {
@@ -230,11 +221,6 @@ export default class Shape {
     }
 
     return this;
-  }
-
-  removeOverlap() {
-    console.warn(`Shape.removeOverlap is being depricated, use Shape.simplify('pftNonZero') instead`);
-    this.simplify('pftNonZero');
   }
 
   simplify(fillType) {
@@ -321,7 +307,7 @@ function mapLowerToCapital(path) {
 }
 
 function vectorToCapital({ x, y }) {
-  return { X: x, Y: y };
+  return new ClipperLib.IntPoint(x, y);
 }
 
 function mapToRound(path) {
@@ -329,7 +315,7 @@ function mapToRound(path) {
 }
 
 function roundVector({ X, Y }) {
-  return { X: Math.round(X), Y: Math.round(Y) };
+  return new ClipperLib.IntPoint(Math.round(X), Math.round(Y));
 }
 
 function filterPathsDuplicates(path) {
