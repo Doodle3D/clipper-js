@@ -34,6 +34,6 @@
     "browser-sync": "^2.11.1"
   },
   "dependencies": {
-    "@doodle3d/clipper-lib": "^6.2.2"
+    "@doodle3d/clipper-lib": "^6.4.2"
   }
 }
