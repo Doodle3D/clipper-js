@@ -54,7 +54,7 @@ import Shape from 'Doodle3D/clipper-js';
 Install the library.
 
 ```
-npm install clipper-js --save
+npm install @doodle3d/clipper-js --save
 ```
 
 Include the library.
