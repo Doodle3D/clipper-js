@@ -1,6 +1,6 @@
 {
   "name": "@doodle3d/clipper-js",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Clipper-lib abstraction layer (simplified API)",
   "main": "lib/index.js",
   "module": "module/index.js",
