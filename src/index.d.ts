@@ -45,7 +45,7 @@ export default class Shape {
     perimeters(): number[];
     totalPerimeter(): number;
     reverse(): this;
-    thresholdArea(minArea: number): void;
+    thresholdArea(minArea: number): this;
 
     join(shape: Shape): this;
     clone(): Shape;

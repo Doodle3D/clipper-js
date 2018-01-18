@@ -155,6 +155,7 @@ export default class Shape {
         this.splice(index, 1);
       }
     }
+    return this;
   }
 
   join(shape) {
