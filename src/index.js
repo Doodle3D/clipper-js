@@ -147,9 +147,8 @@ export default class Shape {
   }
 
   thresholdArea(minArea) {
-    // code not tested yet
     for (const path of [...this.paths]) {
-      const area = Math.abs(ClipperLib.Clipper.Area(shape));
+      const area = Math.abs(ClipperLib.Clipper.Area(path));
 
       if (area < minArea) {
         const index = this.paths.indexOf(path);
