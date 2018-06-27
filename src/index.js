@@ -152,7 +152,7 @@ export default class Shape {
 
       if (area < minArea) {
         const index = this.paths.indexOf(path);
-        this.splice(index, 1);
+        this.paths.splice(index, 1);
       }
     }
     return this;
