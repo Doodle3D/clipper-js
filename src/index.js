@@ -1,4 +1,4 @@
-import ClipperLib from 'clipper-lib';
+import ClipperLib from '@doodle3d/clipper-lib/clipper';
 
 let errorCallback;
 export const setErrorCallback = (callback) => {
