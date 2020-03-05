@@ -232,7 +232,7 @@ export default class Shape {
     }
   }
 
-  seperateShapes() {
+  separateShapes() {
     const shapes = [];
 
     if (!this.closed) {
