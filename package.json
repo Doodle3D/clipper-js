@@ -31,7 +31,9 @@
     "babel-core": "^6.5.2",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-latest": "^6.5.0",
-    "browser-sync": "^2.11.1"
+    "browser-sync": "^2.26.7",
+    "server": "^1.0.27",
+    "tape": "^4.13.2"
   },
   "dependencies": {
     "@doodle3d/clipper-lib": "^6.4.2-b"
