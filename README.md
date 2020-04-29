@@ -75,12 +75,13 @@ paths = [...[...{ X: Number, Y: Number }] || [...[...{ x: Number, y: Number }]
 paths = Array
 closed = Bool
 capitalConversion = Bool
+integerConversion = Bool
 removeDuplicates = Bool
 ```
   - paths: the paths that make up the shape
   - closed: Shape is a polygon or line
   - capitalConversion: converts lower case x and y to uppercase X and Y
-  - capitalConversion: clipper only works with intergers, sometimes when input is in floats clipper fails
+  - integerConversion: clipper only works with intergers, sometimes when input is in floats clipper fails
   - removeDuplicates: clipper sometimes fails when there are duplicate points in the data set, this argument filters out all the duplicate points
 
 `Note: due to the nature of Clipper, some functions are destructive and some are non-destructive.`
