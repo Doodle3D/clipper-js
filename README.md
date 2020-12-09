@@ -328,11 +328,11 @@ Shape = Shape.simplify(fillType: String)
 Simplifies shape using filltype. Only works for closed shapes.
 
 
-**Sperate Shapes**
+**Separate Shapes**
 ```javascript
-[...Shape] = Shape.seperateShapes()
+[...Shape] = Shape.separateShapes()
 ```
-when using union operations multiple shapes can be created. Sperate Shapes splits these shapes into seperate instances. All shapes keep their holes.
+when using union operations multiple shapes can be created. Separate Shapes splits these shapes into separate instances. All shapes keep their holes.
 
 
 **Round**
