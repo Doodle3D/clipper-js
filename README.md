@@ -26,7 +26,7 @@ clipper.Execute(ClipperLib.ClipType.ctIntersection, result);
 In ClipperJS
 ```javascript
 const subject = new Shape(subjectPaths, true);
-const clip = new Shape(subjectPaths, true);
+const clip = new Shape(clipPaths, true);
 
 const result = subject.intersect(clip);
 
